@@ -196,19 +196,7 @@ section > div[style*="height:3px"] {
   padding: 28px 40px !important;
 }
 
-/* Slide-in keyframe for section children */
-@keyframes rise {
-  from { opacity: 0; transform: translateY(18px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
 
-/* Animate direct children of sections on first paint */
-section > * {
-  animation: rise 0.6s cubic-bezier(0.22,1,0.36,1) both;
-}
-section > *:nth-child(2) { animation-delay: 0.07s; }
-section > *:nth-child(3) { animation-delay: 0.14s; }
-section > *:nth-child(4) { animation-delay: 0.21s; }
 
 /* Shimmer on top accent lines */
 @keyframes shimmer {
@@ -275,6 +263,22 @@ section > div[style*="height:3px"],
 section > div[style*="height:2px"] {
   filter: blur(0.5px);
 }
+
+
+/* ── Slide content entrance animation ────────────────────────── */
+@keyframes content-rise {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Animate non-decorative children when slide gains .slide-enter class */
+section.slide-enter > *:not(.blob):not([style*="position:absolute"]) {
+  animation: content-rise 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+section.slide-enter > *:not(.blob):not([style*="position:absolute"]):nth-child(2) { animation-delay: 0.06s; }
+section.slide-enter > *:not(.blob):not([style*="position:absolute"]):nth-child(3) { animation-delay: 0.12s; }
+section.slide-enter > *:not(.blob):not([style*="position:absolute"]):nth-child(4) { animation-delay: 0.18s; }
+section.slide-enter > *:not(.blob):not([style*="position:absolute"]):nth-child(5) { animation-delay: 0.24s; }
 
 </style>
 </head>
@@ -1460,5 +1464,36 @@ section > div[style*="height:2px"] {
 })();
 
 </script>
+
+<script>
+(function () {
+  function triggerEnter(slide) {
+    if (!slide) return;
+    slide.classList.remove('slide-enter');
+    void slide.offsetWidth; // force reflow so animation restarts
+    slide.classList.add('slide-enter');
+  }
+
+  var ds = document.querySelector('deck-stage');
+  if (!ds) return;
+
+  // Fire on every slide change
+  ds.addEventListener('slidechange', function (e) {
+    triggerEnter(e.detail && e.detail.slide);
+  });
+
+  // Fire on first load — wait for deck-stage to be ready
+  function initFirst() {
+    var active = ds.querySelector('section.active') || ds.querySelector('section');
+    triggerEnter(active);
+  }
+  if (document.readyState === 'complete') {
+    setTimeout(initFirst, 50);
+  } else {
+    window.addEventListener('load', function () { setTimeout(initFirst, 50); });
+  }
+})();
+</script>
+
 </body>
 </html>
