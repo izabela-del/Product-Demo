@@ -569,137 +569,86 @@ deck-stage section { transition: opacity 0.35s ease; }
 /* ── Section base ── */
 deck-stage > section { position: relative; overflow: hidden; }
 
-/* ── Ambient orb backgrounds on dark slides ── */
-section[data-label="Title"]::before,
-section[data-label="Step 2 Sign In"]::before,
-section[data-label="Step 4 Authorize"]::before,
-section[data-label="The Workflow"]::before,
-section[data-label="API Access"]::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  background:
-    radial-gradient(ellipse 700px 700px at 12% 15%, rgba(82,0,212,0.45) 0%, transparent 70%),
-    radial-gradient(ellipse 600px 600px at 90% 82%, rgba(43,92,255,0.3) 0%, transparent 70%),
-    radial-gradient(ellipse 450px 450px at 68% 12%, rgba(128,232,255,0.13) 0%, transparent 60%);
-  animation: orb-breathe 12s ease-in-out infinite;
-}
-section[data-label="Step 4 Authorize"]::before {
-  background:
-    radial-gradient(ellipse 750px 750px at 8% 85%, rgba(82,0,212,0.55) 0%, transparent 70%),
-    radial-gradient(ellipse 500px 500px at 92% 8%, rgba(128,232,255,0.18) 0%, transparent 60%);
-}
-section[data-label="API Access"]::before {
-  background:
-    radial-gradient(ellipse 650px 650px at 95% 15%, rgba(128,232,255,0.14) 0%, transparent 60%),
-    radial-gradient(ellipse 600px 600px at 50% 100%, rgba(82,0,212,0.4) 0%, transparent 70%),
-    radial-gradient(ellipse 500px 500px at 5% 45%, rgba(43,92,255,0.2) 0%, transparent 70%);
-}
-section[data-label="Step 2 Sign In"]::before {
-  background:
-    radial-gradient(ellipse 600px 600px at 5% 10%, rgba(82,0,212,0.5) 0%, transparent 70%),
-    radial-gradient(ellipse 500px 500px at 95% 90%, rgba(43,92,255,0.25) 0%, transparent 70%);
-}
-@keyframes orb-breathe {
-  0%,100% { opacity: 0.75; transform: scale(1)    rotate(0deg); }
-  40%     { opacity: 1;    transform: scale(1.06) rotate(1.5deg); }
-  70%     { opacity: 0.85; transform: scale(0.96) rotate(-1deg); }
+/* ── Slow-moving gradient on dark slides ── */
+@keyframes grad-drift {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 
-/* ── Subtle grain texture ── */
-body::after {
-  content: '';
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: 9999;
-  opacity: 0.028;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E");
-  background-size: 220px;
+section[data-label="Title"],
+section[data-label="Step 2 Sign In"],
+section[data-label="Step 4 Authorize"],
+section[data-label="The Workflow"],
+section[data-label="API Access"] {
+  background: linear-gradient(
+    135deg,
+    #0d0820 0%,
+    #140D26 30%,
+    #1a0a3a 55%,
+    #0e1535 80%,
+    #140D26 100%
+  ) !important;
+  background-size: 300% 300% !important;
+  animation: grad-drift 18s ease-in-out infinite;
+}
+
+section[data-label="Step 4 Authorize"] {
+  background: linear-gradient(
+    135deg,
+    #2d0060 0%,
+    #5200D4 35%,
+    #3a00a0 60%,
+    #1e0050 100%
+  ) !important;
+  background-size: 300% 300% !important;
+  animation: grad-drift 20s ease-in-out infinite;
 }
 
 /* ── Entrance keyframes ── */
 @keyframes slide-up {
-  from { opacity: 0; transform: translateY(40px); }
+  from { opacity: 0; transform: translateY(28px); }
   to   { opacity: 1; transform: translateY(0); }
 }
-@keyframes fade-scale {
-  from { opacity: 0; transform: scale(0.93) translateY(14px); }
-  to   { opacity: 1; transform: scale(1)    translateY(0); }
-}
-@keyframes fade-right {
-  from { opacity: 0; transform: translateX(-28px); }
-  to   { opacity: 1; transform: translateX(0); }
+@keyframes fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
 }
 
-/* ── Entrance animations on active slide ── */
-.slide-active .step-pill          { animation: slide-up  0.55s cubic-bezier(0.22,1,0.36,1) both 0.06s; }
-.slide-active h1                  { animation: slide-up  0.75s cubic-bezier(0.22,1,0.36,1) both 0.16s; }
-.slide-active h2                  { animation: slide-up  0.65s cubic-bezier(0.22,1,0.36,1) both 0.20s; }
-.slide-active p                   { animation: slide-up  0.55s cubic-bezier(0.22,1,0.36,1) both 0.34s; }
-.slide-active .code-block         { animation: fade-scale 0.55s cubic-bezier(0.22,1,0.36,1) both 0.50s; }
-.slide-active .stripe-bar         { animation: fade-right 0.5s  cubic-bezier(0.22,1,0.36,1) both 0.08s; }
+/* ── Subtle entrance animations ── */
+.slide-active .step-pill    { animation: slide-up 0.5s cubic-bezier(0.22,1,0.36,1) both 0.05s; }
+.slide-active h1            { animation: slide-up 0.6s cubic-bezier(0.22,1,0.36,1) both 0.12s; }
+.slide-active h2            { animation: slide-up 0.6s cubic-bezier(0.22,1,0.36,1) both 0.15s; }
+.slide-active p             { animation: slide-up 0.5s cubic-bezier(0.22,1,0.36,1) both 0.28s; }
+.slide-active .code-block   { animation: fade-in  0.5s ease both 0.44s; }
 
-/* Staggered step cards */
-.slide-active .step-card          { animation: fade-scale 0.6s cubic-bezier(0.22,1,0.36,1) both; }
-.slide-active .step-card:nth-child(1) { animation-delay: 0.18s; }
-.slide-active .step-card:nth-child(2) { animation-delay: 0.32s; }
-.slide-active .step-card:nth-child(3) { animation-delay: 0.46s; }
+.slide-active .step-card          { animation: slide-up 0.5s cubic-bezier(0.22,1,0.36,1) both; }
+.slide-active .step-card:nth-child(1) { animation-delay: 0.16s; }
+.slide-active .step-card:nth-child(2) { animation-delay: 0.28s; }
+.slide-active .step-card:nth-child(3) { animation-delay: 0.40s; }
 
-/* Staggered tip rows */
-.slide-active .tip-row            { animation: slide-up 0.5s cubic-bezier(0.22,1,0.36,1) both; }
-.slide-active .tip-row:nth-child(1) { animation-delay: 0.26s; }
-.slide-active .tip-row:nth-child(2) { animation-delay: 0.38s; }
-.slide-active .tip-row:nth-child(3) { animation-delay: 0.50s; }
-.slide-active .tip-row:nth-child(4) { animation-delay: 0.62s; }
-.slide-active .tip-row:nth-child(5) { animation-delay: 0.74s; }
+.slide-active .tip-row            { animation: slide-up 0.45s cubic-bezier(0.22,1,0.36,1) both; }
+.slide-active .tip-row:nth-child(1) { animation-delay: 0.20s; }
+.slide-active .tip-row:nth-child(2) { animation-delay: 0.30s; }
+.slide-active .tip-row:nth-child(3) { animation-delay: 0.40s; }
+.slide-active .tip-row:nth-child(4) { animation-delay: 0.50s; }
+.slide-active .tip-row:nth-child(5) { animation-delay: 0.60s; }
 
-/* Staggered flow boxes */
-.slide-active .flow-box           { animation: fade-scale 0.6s cubic-bezier(0.22,1,0.36,1) both; }
-.slide-active .flow-box:nth-child(1) { animation-delay: 0.22s; }
-.slide-active .flow-box:nth-child(2) { animation-delay: 0.40s; }
-.slide-active .flow-box:nth-child(3) { animation-delay: 0.58s; }
+.slide-active .flow-box            { animation: slide-up 0.5s cubic-bezier(0.22,1,0.36,1) both; }
+.slide-active .flow-box:nth-child(1) { animation-delay: 0.18s; }
+.slide-active .flow-box:nth-child(2) { animation-delay: 0.32s; }
+.slide-active .flow-box:nth-child(3) { animation-delay: 0.46s; }
 
-/* ── Glowing pill on dark slides ── */
-@keyframes pill-glow {
-  0%,100% { box-shadow: 0 0 0  0   rgba(128,232,255,0);    }
-  50%     { box-shadow: 0 0 28px 6px rgba(128,232,255,0.28); }
-}
-.slide-active .step-pill.dark {
-  animation: slide-up 0.55s cubic-bezier(0.22,1,0.36,1) both 0.06s,
-             pill-glow 2.8s ease-in-out infinite 0.7s;
-}
-
-/* ── Animated stripe bar ── */
-.stripe-bar span { transition: opacity 0.4s ease; }
-@keyframes stripe-pulse {
-  0%,100% { opacity: 1; }
-  50%     { opacity: 0.55; }
-}
-.stripe-bar .s1 { animation: stripe-pulse 2.8s ease-in-out infinite 0s; }
-.stripe-bar .s2 { animation: stripe-pulse 2.8s ease-in-out infinite 0.4s; }
-.stripe-bar .s3 { animation: stripe-pulse 2.8s ease-in-out infinite 0.8s; }
-
-/* ── Hover lift on cards ── */
+/* ── Subtle hover lift on cards ── */
 .step-card, .flow-box {
-  transition: transform 0.22s ease, box-shadow 0.22s ease;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
-.step-card:hover { transform: translateY(-5px); box-shadow: 0 16px 48px rgba(0,0,0,0.13); }
-.flow-box:hover  { transform: translateY(-4px); box-shadow: 0 12px 36px rgba(0,0,0,0.12); }
+.step-card:hover { transform: translateY(-3px); box-shadow: 0 10px 32px rgba(0,0,0,0.1); }
+.flow-box:hover  { transform: translateY(-3px); box-shadow: 0 10px 32px rgba(0,0,0,0.1); }
 
-/* ── Enhanced slide fade ── */
-deck-stage section { transition: opacity 0.45s cubic-bezier(0.4,0,0.2,1) !important; }
+/* ── Smoother slide transition ── */
+deck-stage section { transition: opacity 0.4s cubic-bezier(0.4,0,0.2,1) !important; }
 
-/* ── Animated gradient on top bar ── */
-@keyframes bar-shift {
-  0%   { background-position: 0% 0%; }
-  100% { background-position: 200% 0%; }
-}
-.slide-active [style*="linear-gradient(90deg, #7DD3DE"] {
-  background-size: 200% 100% !important;
-  animation: bar-shift 3s linear infinite;
-}
 </style>
 
 <script>
