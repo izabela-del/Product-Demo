@@ -165,7 +165,7 @@ deck-stage section { transition: opacity 0.35s ease; }
   "Before we dive in, here's what you'll need. A Claude account on Pro, Max, Team, or Enterprise. The Claude Code desktop app — we'll download that in a second. And a Figma account if you want to pull your designs directly into the workflow.",
   "Step one: grab the app. Head to claude.com/download and download it for Mac or Windows. It installs just like any other app — drag it to Applications on Mac, or run the installer on Windows. Should take less than a minute.",
   "Once it's installed, open Claude Code and sign in with your Claude account. You'll need a paid plan — Pro works great. If you're on a team, check if your company already has a Team or Enterprise plan you can join.",
-  "Now here's where the magic happens for designers. In the Claude chat, just type: connect to figma. Claude will reply with a link — click it, and it opens a Figma authorization page in your browser.",
+  "Now here's where the magic happens for designers. Open your terminal and run one command: claude plugin install figma@claude-plugins-official. That installs the official Figma plugin for Claude Code. You'll also need the Figma desktop app open with the MCP server enabled — you'll find that toggle in Figma's dev mode settings.",
   "Log into Figma if you aren't already, then click Allow. That's it. You're authorizing Claude to read your Figma files so you can paste design URLs directly into the chat.",
   "Once you click Allow, Figma sends you back and Claude confirms the connection. From this point on, you can paste any Figma URL into Claude Code and say 'build this' — and it will read the design and start coding.",
   "Here's the full workflow in three steps. You design in Figma, Claude reads it and builds the code, and you give feedback in plain English to refine. It's a conversation, not a one-shot prompt. The more context you give Claude — colors, fonts, behaviors — the better the output.",
@@ -341,28 +341,25 @@ deck-stage section { transition: opacity 0.35s ease; }
         <div class="step-pill" style="margin-bottom:40px;">Step 3 of 5</div>
         <h2 style="font-size:var(--t-title);font-weight:800;color:var(--ink);letter-spacing:-0.025em;line-height:1.1;margin-bottom:32px;">Connect<br/>Figma</h2>
         <p style="font-size:var(--t-body);color:#525252;line-height:1.6;margin-bottom:48px;">
-          In the Claude Code chat, just type this command. Claude will reply with a link to authorize your Figma account.
+          Open your terminal and run this command to install the official Figma plugin. Make sure the Figma desktop app is open with the MCP server enabled first.
         </p>
         <div class="code-block">
-          <span class="prompt">&gt;</span>
-          <span class="cmd">connect to figma</span>
+          <span class="prompt">$</span>
+          <span class="cmd">claude plugin install figma@claude-plugins-official</span>
         </div>
       </div>
-      <div style="background:var(--neutral-50);border:1.5px solid var(--neutral-200);border-radius:24px;padding:48px;display:flex;flex-direction:column;gap:24px;">
-        <div style="display:flex;align-items:flex-start;gap:16px;">
-          <div style="width:44px;height:44px;background:var(--neutral-200);border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#737373" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-          </div>
-          <div style="background:var(--neutral-200);border-radius:16px;border-top-left-radius:4px;padding:20px 28px;font-size:26px;color:var(--ink);font-weight:500;">connect to figma</div>
+      <div style="background:#1a1a2e;border-radius:24px;padding:48px;display:flex;flex-direction:column;gap:0;">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:28px;">
+          <div style="width:14px;height:14px;border-radius:50%;background:#ff5f57;"></div>
+          <div style="width:14px;height:14px;border-radius:50%;background:#febc2e;"></div>
+          <div style="width:14px;height:14px;border-radius:50%;background:#28c840;"></div>
+          <span style="color:rgba(255,255,255,0.4);font-size:20px;margin-left:12px;">Terminal</span>
         </div>
-        <div style="display:flex;align-items:flex-start;gap:16px;flex-direction:row-reverse;">
-          <div style="width:44px;height:44px;background:var(--purple);border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;">
-            <span style="color:white;font-size:24px;font-weight:800;">C</span>
-          </div>
-          <div style="background:var(--purple-300);border-radius:16px;border-top-right-radius:4px;padding:20px 28px;font-size:24px;color:var(--ink);line-height:1.6;max-width:400px;">
-            I'll connect to Figma now. Click this link to authorize:<br/><br/>
-            <span style="color:var(--purple);font-weight:700;text-decoration:underline;">figma.com/oauth/authorize?...</span>
-          </div>
+        <div style="font-family:monospace;font-size:22px;line-height:1.8;color:#e2e8f0;">
+          <span style="color:#80E8FF;">$</span> <span style="color:#ffffff;">claude plugin install figma@claude-plugins-official</span><br/>
+          <span style="color:rgba(255,255,255,0.4);font-size:20px;">Installing plugin...</span><br/>
+          <span style="color:#28c840;">✓ figma plugin installed successfully</span><br/>
+          <span style="color:rgba(255,255,255,0.4);font-size:20px;">MCP server connected at 127.0.0.1:3845</span>
         </div>
       </div>
     </div>
