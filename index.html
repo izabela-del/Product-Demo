@@ -2,6 +2,9 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8"/>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>How I Vibe Code Using Claude Code</title>
 <style>
@@ -117,6 +120,162 @@ section {
 
 /* ── Transitions ────────────────────────────────── */
 deck-stage section { transition: opacity 0.4s ease; }
+
+/* ── Design Enhancement Layer ─────────────────────────── */
+:root {
+  --font-display: 'Syne', 'Inter', -apple-system, sans-serif;
+  --gold: #F0C93A;
+  --gold-glow: rgba(240,201,58,0.18);
+}
+
+/* Display font for all headings */
+section h1, section h2, section h3 {
+  font-family: var(--font-display) !important;
+}
+
+/* Improved gradient text — richer, more saturated */
+.grad-text {
+  background: linear-gradient(120deg, #60A5FA 0%, #C084FC 50%, #22D3EE 100%) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  background-clip: text !important;
+}
+
+/* Pills: use display font, slightly refined */
+.pill {
+  font-family: var(--font-display) !important;
+  letter-spacing: 0.11em !important;
+  font-size: 19px !important;
+  padding: 9px 24px !important;
+  background: rgba(96,165,250,0.10) !important;
+  border-color: rgba(96,165,250,0.3) !important;
+  color: #93C5FD !important;
+}
+
+/* Glass: deeper, more luxurious */
+.glass {
+  background: rgba(255,255,255,0.025) !important;
+  border: 1px solid rgba(255,255,255,0.09) !important;
+  backdrop-filter: blur(24px) saturate(160%) !important;
+  -webkit-backdrop-filter: blur(24px) saturate(160%) !important;
+  box-shadow:
+    inset 0 0.5px 0 rgba(255,255,255,0.08),
+    0 24px 80px rgba(0,0,0,0.45) !important;
+}
+
+/* Blobs: softer blur for more painterly look */
+.blob {
+  filter: blur(110px) !important;
+}
+
+/* Grain texture overlay on every slide */
+section::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 200;
+  pointer-events: none;
+  opacity: 0.022;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23g)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 200px 200px;
+}
+
+/* Accent bar on top: add subtle glow */
+section > div[style*="height:3px"] {
+  box-shadow: 0 0 20px rgba(43,111,255,0.4) !important;
+  height: 2px !important;
+}
+
+/* Code block: refined mono feel */
+.code-block {
+  background: rgba(0,0,0,0.75) !important;
+  border-color: rgba(96,165,250,0.2) !important;
+  box-shadow: inset 0 0 0 0.5px rgba(96,165,250,0.08) !important;
+  border-radius: 12px !important;
+  padding: 28px 40px !important;
+}
+
+/* Slide-in keyframe for section children */
+@keyframes rise {
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Animate direct children of sections on first paint */
+section > * {
+  animation: rise 0.6s cubic-bezier(0.22,1,0.36,1) both;
+}
+section > *:nth-child(2) { animation-delay: 0.07s; }
+section > *:nth-child(3) { animation-delay: 0.14s; }
+section > *:nth-child(4) { animation-delay: 0.21s; }
+
+/* Shimmer on top accent lines */
+@keyframes shimmer {
+  0%   { opacity: 0.6; }
+  100% { opacity: 1.0; }
+}
+section > div[style*="height:3px"],
+section > div[style*="height:2px"] {
+  animation: shimmer 4s ease-in-out infinite alternate !important;
+}
+
+
+/* BOLD watermark: use display font for all inline uppercase markers */
+section > div[style*="letter-spacing:0.12em"] {
+  font-family: var(--font-display) !important;
+}
+
+/* Eyebrow line on hero slide */
+section div[style*="text-transform:uppercase"] {
+  font-family: var(--font-display) !important;
+}
+
+/* Slide counter dots / progress hint at bottom */
+section > div[style*="bottom:56px"] {
+  font-family: var(--font-display) !important;
+  font-size: 16px !important;
+  letter-spacing: 0.15em !important;
+  color: rgba(255,255,255,0.15) !important;
+}
+
+/* Hero h1 — tighten tracking further */
+section[data-label="Title"] h1 {
+  letter-spacing: -0.04em !important;
+  line-height: 0.96 !important;
+}
+
+/* Card h3 headings — display font */
+.glass h3, .glass h2 {
+  font-family: var(--font-display) !important;
+}
+
+/* Icon containers on cards — slightly larger corner radius */
+section div[style*="border-radius:16px"][style*="background:linear-gradient"] {
+  border-radius: 20px !important;
+}
+
+/* Tip dots — add a subtle pulse glow */
+.tip-dot {
+  box-shadow: 0 0 12px rgba(43,111,255,0.6) !important;
+  width: 8px !important;
+  height: 8px !important;
+}
+
+/* Hero intro badge line */
+section[data-label="Title"] div[style*="margin-bottom:52px"] span {
+  font-family: var(--font-display) !important;
+  color: rgba(255,255,255,0.35) !important;
+  font-weight: 500 !important;
+  font-size: 20px !important;
+}
+
+/* Make the 3px top line glow */
+section > div[style*="height:3px"],
+section > div[style*="height:2px"] {
+  filter: blur(0.5px);
+}
+
 </style>
 </head>
 <body>
@@ -141,34 +300,42 @@ deck-stage section { transition: opacity 0.4s ease; }
 <!-- ── 01 Title ──────────────────────────────────────────────────────── -->
 <section data-label="Title" style="background:var(--black); justify-content:center; padding:var(--px);">
   <!-- Blobs -->
-  <div class="blob" style="width:900px;height:900px;background:radial-gradient(circle,rgba(43,111,255,0.35) 0%,transparent 70%);right:-200px;top:-200px;"></div>
-  <div class="blob" style="width:600px;height:600px;background:radial-gradient(circle,rgba(139,92,246,0.25) 0%,transparent 70%);left:-100px;bottom:-100px;"></div>
-  <div class="blob" style="width:400px;height:400px;background:radial-gradient(circle,rgba(0,212,255,0.15) 0%,transparent 70%);left:40%;top:30%;"></div>
+  <div class="blob" style="width:1100px;height:1100px;background:radial-gradient(circle,rgba(43,111,255,0.28) 0%,transparent 65%);right:-280px;top:-280px;"></div>
+  <div class="blob" style="width:700px;height:700px;background:radial-gradient(circle,rgba(139,92,246,0.22) 0%,transparent 70%);left:-180px;bottom:-180px;"></div>
+  <div class="blob" style="width:500px;height:500px;background:radial-gradient(circle,rgba(0,212,255,0.12) 0%,transparent 70%);left:45%;top:25%;"></div>
+
+  <!-- Subtle dot grid -->
+  <div style="position:absolute;inset:0;background-image:radial-gradient(circle,rgba(255,255,255,0.06) 1px,transparent 1px);background-size:42px 42px;pointer-events:none;mask-image:radial-gradient(ellipse 80% 80% at 50% 50%,black 20%,transparent 100%);-webkit-mask-image:radial-gradient(ellipse 80% 80% at 50% 50%,black 20%,transparent 100%);"></div>
 
   <!-- Top bar -->
-  <div style="position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--blue),var(--purple),var(--cyan));"></div>
+  <div style="position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--blue),var(--purple),var(--cyan));"></div>
 
   <!-- Logo -->
-  <div style="position:absolute;top:48px;right:72px;font-size:22px;font-weight:900;letter-spacing:0.12em;color:rgba(255,255,255,0.4);">BOLD</div>
+  <div style="position:absolute;top:44px;right:68px;font-family:'Syne',sans-serif;font-size:20px;font-weight:800;letter-spacing:0.18em;color:rgba(255,255,255,0.3);">BOLD</div>
 
-  <div style="position:relative;z-index:1;max-width:1300px;">
-    <div style="display:flex;align-items:center;gap:16px;margin-bottom:52px;">
-      <div style="width:40px;height:3px;background:linear-gradient(90deg,var(--blue),var(--purple));border-radius:2px;"></div>
-      <span style="font-size:var(--t-label);font-weight:600;color:rgba(255,255,255,0.45);letter-spacing:0.12em;text-transform:uppercase;">Getting Started Guide</span>
+  <div style="position:relative;z-index:1;max-width:1320px;">
+    <div style="display:flex;align-items:center;gap:18px;margin-bottom:56px;">
+      <div style="width:48px;height:2px;background:linear-gradient(90deg,var(--cyan),var(--blue));border-radius:2px;"></div>
+      <span style="font-family:'Syne',sans-serif;font-size:18px;font-weight:600;color:rgba(255,255,255,0.38);letter-spacing:0.16em;text-transform:uppercase;">Getting Started Guide · 2026</span>
     </div>
-    <h1 style="font-size:var(--t-hero);font-weight:900;color:var(--white);line-height:1.02;letter-spacing:-0.03em;margin-bottom:16px;">
+    <h1 style="font-size:var(--t-hero);font-weight:800;color:var(--white);line-height:0.95;letter-spacing:-0.04em;margin-bottom:12px;">
       How I Vibe Code
     </h1>
-    <h1 style="font-size:var(--t-hero);font-weight:900;line-height:1.02;letter-spacing:-0.03em;margin-bottom:52px;" class="grad-text">
+    <h1 style="font-size:var(--t-hero);font-weight:800;line-height:0.95;letter-spacing:-0.04em;margin-bottom:60px;" class="grad-text">
       Using Claude Code
     </h1>
-    <p style="font-size:var(--t-sub);color:rgba(255,255,255,0.5);font-weight:400;max-width:760px;line-height:1.5;">
+    <div style="width:80px;height:1px;background:linear-gradient(90deg,rgba(255,255,255,0.3),transparent);margin-bottom:36px;"></div>
+    <p style="font-size:var(--t-sub);color:rgba(255,255,255,0.42);font-weight:400;max-width:720px;line-height:1.55;">
       A step-by-step setup guide for non-technical people — from download to connected Figma workflow.
     </p>
   </div>
 
-  <!-- Year badge bottom-left -->
-  <div style="position:absolute;bottom:56px;left:var(--px);font-size:18px;font-weight:700;letter-spacing:0.08em;color:rgba(255,255,255,0.2);">2026</div>
+  <div style="position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.06),transparent);"></div>
+  <div style="position:absolute;bottom:52px;left:var(--px);display:flex;align-items:center;gap:24px;">
+    <div style="font-family:'Syne',sans-serif;font-size:16px;font-weight:600;letter-spacing:0.14em;color:rgba(255,255,255,0.18);text-transform:uppercase;">UI Collective</div>
+    <div style="width:4px;height:4px;border-radius:50%;background:rgba(255,255,255,0.15);"></div>
+    <div style="font-family:'Syne',sans-serif;font-size:16px;font-weight:600;letter-spacing:0.14em;color:rgba(255,255,255,0.18);text-transform:uppercase;">11 Slides</div>
+  </div>
 </section>
 
 <!-- ── 02 What Is Vibe Coding ────────────────────────────────────────── -->
