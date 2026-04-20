@@ -166,8 +166,8 @@ deck-stage section { transition: opacity 0.35s ease; }
   "Step one: grab the app. Head to claude.com/download and download it for Mac or Windows. It installs just like any other app — drag it to Applications on Mac, or run the installer on Windows. Should take less than a minute.",
   "Once it's installed, open Claude Code and sign in with your Claude account. You'll need a paid plan — Pro works great. If you're on a team, check if your company already has a Team or Enterprise plan you can join.",
   "Now here's where the magic happens for designers. Open your terminal and run one command: claude plugin install figma@claude-plugins-official. That installs the official Figma plugin for Claude Code. You'll also need the Figma desktop app open with the MCP server enabled — you'll find that toggle in Figma's dev mode settings.",
-  "Log into Figma if you aren't already, then click Allow. That's it. You're authorizing Claude to read your Figma files so you can paste design URLs directly into the chat.",
-  "Once you click Allow, Figma sends you back and Claude confirms the connection. From this point on, you can paste any Figma URL into Claude Code and say 'build this' — and it will read the design and start coding.",
+  "Log into Figma if you aren't already, then click Allow access. That's it. You're giving Claude both read and write access to your Figma files — it can read your designs and write back to them directly.",
+  "Once you click Allow, Figma sends you back and Claude confirms the connection. From this point on, you can paste any Figma URL into Claude Code and say 'build this' — Claude reads the design, builds the code, and can even write changes back to Figma.",
   "Here's the full workflow in three steps. You design in Figma, Claude reads it and builds the code, and you give feedback in plain English to refine. It's a conversation, not a one-shot prompt. The more context you give Claude — colors, fonts, behaviors — the better the output.",
   "One important distinction before we wrap up. Everything we've covered today — Claude Code, Figma, vibe coding — that's for building and designing. But if your team needs to build products that use Claude's AI capabilities directly through code — things like custom AI features, integrations, or automations — that's a different path called the Claude API. It requires a developer workflow starting in the terminal. If that's something you're interested in, reach out to Chris G to get access and get started.",
   "A few tips to get the best results. Be specific in your prompts. Paste your Figma URL and describe the behavior, not just the look. Don't be afraid to iterate — it's a conversation. And remember: Claude Design is great for polished, shareable prototypes before you even touch code. Start there, then bring it into Claude Code."
@@ -416,7 +416,7 @@ deck-stage section { transition: opacity 0.35s ease; }
           After running the install command, a browser page opens asking for permission. Log into Figma if needed, then click <strong style="color:white;">Allow access.</strong>
         </p>
         <p style="font-size:var(--t-small);color:rgba(255,255,255,0.5);line-height:1.5;">
-          This gives Claude read-only access to your Figma files. It cannot edit anything.
+          This gives Claude read <em style="color:white;">and write</em> access to your Figma files. Claude can read your designs and write directly to Figma.
         </p>
       </div>
       <!-- Faithful recreation of the Figma "Allow access" authorization screen -->
